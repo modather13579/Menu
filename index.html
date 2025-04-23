@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قائمة الطعام</title>
+    <style>
+        /* CSS */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #8B0000;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        h2 {
+            color: #8B0000;
+            border-bottom: 2px solid #8B0000;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        
+        .menu-section {
+            margin-bottom: 40px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: right;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #8B0000;
+            color: white;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .price {
+            font-weight: bold;
+            color: #8B0000;
+        }
+        
+        .filter-container {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 8px 15px;
+            background-color: #8B0000;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .filter-btn:hover {
+            background-color: #6d0000;
+        }
+        
+        .filter-btn.active {
+            background-color: #4d0000;
+        }
+        
+        .search-container {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        #search-input {
+            padding: 10px;
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        @media (max-width: 768px) {
+            th, td {
+                padding: 8px 10px;
+                font-size: 14px;
+            }
+            
+            #search-input {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>قائمة الطعام</h1>
+        
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="ابحث عن صنف...">
+        </div>
+        
+        <div class="filter-container">
+            <button class="filter-btn active" data-filter="all">الكل</button>
+            <button class="filter-btn" data-filter="chicken">دجاج</button>
+            <button class="filter-btn" data-filter="meat">لحم</button>
+            <button class="filter-btn" data-filter="grilled">مشوي</button>
+            <button class="filter-btn" data-filter="special">أصناف خاصة</button>
+            <button class="filter-btn" data-filter="combo">وجبات</button>
+            <button class="filter-btn" data-filter="side">أطباق جانبية</button>
+        </div>
+        
+        <div class="menu-section">
+            <h2>الأصناف الرئيسية</h2>
+            <table id="menu-table">
+                <thead>
+                    <tr>
+                        <th>اسم الصنف</th>
+                        <th>الكود</th>
+                        <th>السعر</th>
+                        <th>معلومات إضافية</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-category="chicken">
+                        <td>همبرجر دجاج</td>
+                        <td>274196</td>
+                        <td class="price">10</td>
+                        <td>7</td>
+                    </tr>
+                    <tr data-category="meat">
+                        <td>همبرجر لحم</td>
+                        <td>274195</td>
+                        <td class="price">10</td>
+                        <td>6</td>
+                    </tr>
+                    <tr data-category="chicken">
+                        <td>همبرجر دجاج دبل</td>
+                        <td>262216</td>
+                        <td class="price">17</td>
+                        <td>11</td>
+                    </tr>
+                    <tr data-category="meat">
+                        <td>همبرجر لحم دبل</td>
+                        <td>296215</td>
+                        <td class="price">17</td>
+                        <td>11</td>
+                    </tr>
+                    <tr data-category="grilled chicken">
+                        <td>همبرجر دجاج مشوي</td>
+                        <td>279190</td>
+                        <td class="price">10</td>
+                        <td>10</td>
+                    </tr>
+                    <tr data-category="grilled meat">
+                        <td>همبرجر لحم مشوي</td>
+                        <td>276190</td>
+                        <td class="price">10</td>
+                        <td>10</td>
+                    </tr>
+                    <tr data-category="special">
+                        <td>همبرجر رانجر</td>
+                        <td>267</td>
+                        <td class="price">10</td>
+                        <td>12</td>
+                    </tr>
+                    <tr data-category="special">
+                        <td>همبرجر رانجر دبل</td>
+                        <td>261</td>
+                        <td class="price">17</td>
+                        <td>11</td>
+                    </tr>
+                    <tr data-category="special">
+                        <td>همبرجر جبنة ستيك</td>
+                        <td>287</td>
+                        <td class="price">11</td>
+                        <td>13</td>
+                    </tr>
+                    <tr data-category="special">
+                        <td>همبرجر جبنة ستيك دبل</td>
+                        <td>361</td>
+                        <td class="price">18</td>
+                        <td>17</td>
+                    </tr>
+                    <tr data-category="grilled">
+                        <td>همبرجر مشوي دبل</td>
+                        <td>365229</td>
+                        <td class="price">18</td>
+                        <td>18</td>
+                    </tr>
+                    <tr data-category="grilled">
+                        <td>ساندويتش همبرجر مشوي دبل</td>
+                        <td>365</td>
+                        <td class="price">12</td>
+                        <td>12</td>
+                    </tr>
+                    <tr data-category="special">
+                        <td>همبرجر نذوري</td>
+                        <td>237</td>
+                        <td class="price">11</td>
+                        <td>8</td>
+                    </tr>
+                    <tr data-category="special">
+                        <td>همبرجر سمك</td>
+                        <td>270195</td>
+                        <td class="price">12</td>
+                        <td>7</td>
+                    </tr>
+                    <tr data-category="combo chicken">
+                        <td>وجبة جامعة ملفوف دجاج</td>
+                        <td>365185</td>
+                        <td class="price">12</td>
+                        <td>7</td>
+                    </tr>
+                    <tr data-category="combo">
+                        <td>وجبة جامعة ملفوف سمك</td>
+                        <td>3551195</td>
+                        <td class="price">12</td>
+                        <td>7</td>
+                    </tr>
+                    <tr data-category="combo chicken">
+                        <td>وجبة جامعة أصابع دجاج</td>
+                        <td>310142</td>
+                        <td class="price">12</td>
+                        <td>8</td>
+                    </tr>
+                    <tr data-category="combo">
+                        <td>وجبة جامعة أصابع سمك</td>
+                        <td>310142</td>
+                        <td class="price">12</td>
+                        <td>8</td>
+                    </tr>
+                    <tr data-category="combo meat">
+                        <td>وجبة جامعة شيش طاووق</td>
+                        <td>3301165</td>
+                        <td class="price">12</td>
+                        <td>7</td>
+                    </tr>
+                    <tr data-category="combo chicken">
+                        <td>وجبة جامعة مسحب دجاج</td>
+                        <td>300160</td>
+                        <td class="price">12</td>
+                        <td>7</td>
+                    </tr>
+                    <tr data-category="combo chicken">
+                        <td>وجبة جامعة همبرجر دجاج</td>
+                        <td>295147</td>
+                        <td class="price">11</td>
+                        <td>6</td>
+                    </tr>
+                    <tr data-category="combo">
+                        <td>وجبة جامعة نقانق</td>
+                        <td>2901150</td>
+                        <td class="price">7</td>
+                        <td>4</td>
+                    </tr>
+                    <tr data-category="combo chicken">
+                        <td>وجبة بانيه دجاج</td>
+                        <td>3301165</td>
+                        <td class="price">13</td>
+                        <td>7</td>
+                    </tr>
+                    <tr data-category="side">
+                        <td>بطاطس صحن</td>
+                        <td>2001160</td>
+                        <td class="price">10</td>
+                        <td>14</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const menuItems = document.querySelectorAll('#menu-table tbody tr');
+            const searchInput = document.getElementById('search-input');
+            
+            // فلترة الأصناف
+            filterButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const filter = this.getAttribute('data-filter');
+                    
+                    menuItems.forEach(item => {
+                        if (filter === 'all') {
+                            item.style.display = '';
+                        } else {
+                            if (item.getAttribute('data-category').includes(filter)) {
+                                item.style.display = '';
+                            } else {
+                                item.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+            
+            // البحث عن الأصناف
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                menuItems.forEach(item => {
+                    const itemName = item.querySelector('td').textContent.toLowerCase();
+                    
+                    if (itemName.includes(searchTerm)) {
+                        item.style.display = '';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
